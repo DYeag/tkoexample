@@ -7,11 +7,11 @@
   tasks:
   - name: Create a directory if it does not exist
     ansible.builtin.file:
-      path: {{ new_path }}
+      path: /hdd/www
       state: directory
       mode: '0777'
   
   - name: Synchronization of src on the control machine to dest on the remote hosts
     ansible.posix.synchronize:
-      src: {{ old_path }}
-      dest: {{ new_path }}
+      src: /var/www
+      dest: /hdd/www
