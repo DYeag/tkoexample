@@ -5,6 +5,10 @@
   - mount_path: /hdd
 
   tasks:
+  - name: Unmount File System
+    mount:
+      path: "{{ mount_src }}"
+      state: unmounted
   - name: Create a directory if it does not exist
     ansible.builtin.file:
       path: /hdd
