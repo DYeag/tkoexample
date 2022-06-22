@@ -2,21 +2,21 @@
 - hosts: all
   vars:
   - mount_src: /dev/sda1
-  - mount_path: /newdisk
+  - mount_path: /hdd
 
   tasks:
-  - name: Create list of mounted devices
-    set_fact:
-      mounted_devices: "{{ ansible_mounts|json_query('[].device') }}"
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: /hdd
+      state: directory
+      mode: '0777'
   - name: Create File System
     filesystem:
       fstype: ext4
       dev: "{{ mount_src }}"
-    when: mount_src not in mounted_devices
   - name: Mount File System
     mount:
       path: "{{ mount_path }}"
       src: "{{ mount_src }}"
       fstype: ext4
       state: mounted
-    when: mount_src not in mounted_devices
