@@ -1,0 +1,10 @@
+---
+- hosts: all
+  vars:
+  - new_hostname: "{{HOSTNAME|default('badhostname')}}"
+
+  become: yes
+  tasks:
+  - name: "update hostname"
+    hostname:
+      name: "{{ new_hostname }}"
