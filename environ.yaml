@@ -2,6 +2,10 @@
 - name: Ping
   hosts: server
   gather_facts: false
+  vars:
+  - one: "{{param1|default('bad1')}}"
+  - two: "{{param2|default('bad2')}}"
+  - three: "{{param3|default('bad3')}}"
 
-  tasks:
-  - ping:
+  debug:
+    msg: "param1 is {{ one }}, param2 is {{ two }}, param3 is {{ three }}"
