@@ -1,6 +1,17 @@
 ---
 - hosts: all
+  vars:
+  - old_path: /var/www
+  - new_path: /hdd/www
 
   tasks:
-  - name: Print Vars
-    debug: msg="Hello World!"
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: {{ new_path }}
+      state: directory
+      mode: '0777'
+  
+  - name: Synchronization of src on the control machine to dest on the remote hosts
+    ansible.posix.synchronize:
+      src: {{ old_path }}
+      dest: {{ new_path }}
