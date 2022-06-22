@@ -1,13 +1,10 @@
 ---
-- name: Ping
-  hosts: server
-  gather_facts: false
+- hosts: all
   vars:
   - one: "{{param1|default('bad1')}}"
   - two: "{{param2|default('bad2')}}"
   - three: "{{param3|default('bad3')}}"
-  
+
   tasks:
-    - shell: echo '{{ one }}'
-      register: foo
-    - debug: msg="the echo was {{ foo.stdout }}"
+  - name: Print Vars
+    debug: msg="param1 is {{ one }}, param2 is {{two}}, param3 is {{three}}"
