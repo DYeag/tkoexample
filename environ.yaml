@@ -8,3 +8,8 @@
   tasks:
   - name: Print Vars
     debug: msg="param1 is {{ one }}, param2 is {{two}}, param3 is {{three}}"
+    
+  - name: Print EnvVars
+      shell: printenv
+      register: ps
+        debug: var=ps.stdout_lines
